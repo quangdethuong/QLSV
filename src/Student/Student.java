@@ -77,7 +77,7 @@ public class Student {
         return gradeHoa;
     }
 
-    public double sumAverage() {
+    private double sumAverage() {
         return (gradeToan + gradeLy + gradeHoa ) / 3;
     }
 

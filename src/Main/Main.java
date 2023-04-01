@@ -24,6 +24,7 @@ public class Main {
                     System.out.println("You want to "
                             + "list all new students profile");
                     stu.printAll();
+
                     break;
                 case 3:
                     System.out.println("Bye bye, see you next time!");
