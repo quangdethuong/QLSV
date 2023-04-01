@@ -3,6 +3,8 @@ package Student;
 import Lib.MyToys;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class Student {
@@ -116,7 +118,7 @@ public class Student {
 
         do {
 
-            id = MyToys.getID("Input student id(CXXXXX): ",
+            id = MyToys.getID("Input student id(CEXXXXXX): ",
                     "The format of id is CEXXXXXXX (X stands for a digit)", "^[Cc][Ee]\\d{6}$");
             pos = searchStudentByID(id);
             if (pos >= 0)
@@ -137,6 +139,57 @@ public class Student {
             System.out.println("List of Student is empty => nothing to show!!");
             return;
         }
+        System.out.println("------------------------------------");
+        System.out.println("Here is the Students list");
+        String header = String.format("|%-10s|%-15s|%8s|%8s|%8s|%8s|%8s|%10s|", "ID", "Name", "YOB", "Math", "Physic", "Chemis", "AVG", "GRADE");
+        System.out.println(header);
+        for (int i = 0; i < stuList.size(); i++){
+            stuList.get(i).showProfile();
+        }
+
+    }
+
+    public void printAllSortDesAvg() {
+        if (stuList.isEmpty()){
+            System.out.println("List of Student is empty => nothing to show!!");
+            return;
+        }
+
+
+        Comparator<Student> comp = new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                if (o1.sumAverage() == o2.sumAverage())
+                    return 0;
+                if (o1.sumAverage() < o2.sumAverage())
+                    return 1;
+                else
+                    return -1;
+            }
+        };
+        Collections.sort(stuList, comp);
+        System.out.println("------------------------------------");
+        System.out.println("Here is the Students list");
+        String header = String.format("|%-10s|%-15s|%8s|%8s|%8s|%8s|%8s|%10s|", "ID", "Name", "YOB", "Math", "Physic", "Chemis", "AVG", "GRADE");
+        System.out.println(header);
+        for (int i = 0; i < stuList.size(); i++){
+            stuList.get(i).showProfile();
+        }
+
+    }
+
+    public void printAllSortAscByname() {
+        if (stuList.isEmpty()){
+            System.out.println("List of Student is empty => nothing to show!!");
+            return;
+        }
+        Comparator nameBalance = new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                return o1.getName().compareToIgnoreCase(o2.getName());
+            }
+        };
+        Collections.sort(stuList, nameBalance);
         System.out.println("------------------------------------");
         System.out.println("Here is the Students list");
         String header = String.format("|%-10s|%-15s|%8s|%8s|%8s|%8s|%8s|%10s|", "ID", "Name", "YOB", "Math", "Physic", "Chemis", "AVG", "GRADE");
